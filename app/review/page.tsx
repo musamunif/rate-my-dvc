@@ -7,6 +7,9 @@ import { ProfessorWithStats } from "@/lib/types";
 
 const GRADES = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F", "P", "NP", "Prefer not to say"];
 
+// ADMIN_FEATURE: Student add-professor is disabled. Re-enable by setting this to true.
+const STUDENT_CAN_ADD_PROFESSOR = false;
+
 function StarInput({
   value,
   onChange,
@@ -59,7 +62,7 @@ export default function ReviewPage() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  // Add new professor mode
+  // ADMIN_FEATURE: Add new professor state — kept for when feature is re-enabled
   const [addingNew, setAddingNew] = useState(false);
   const [newName, setNewName] = useState("");
   const [newDept, setNewDept] = useState("");
@@ -84,6 +87,7 @@ export default function ReviewPage() {
       .catch(() => setLoading(false));
   }, []);
 
+  // ADMIN_FEATURE: Handler kept — re-enable by setting STUDENT_CAN_ADD_PROFESSOR = true
   const handleAddProfessor = async () => {
     if (!newName.trim() || !newDept.trim()) return;
     const res = await fetch("/api/professors", {
@@ -180,7 +184,9 @@ export default function ReviewPage() {
           {/* Professor Select */}
           <div>
             <label className="block text-sm text-white/60 mb-2">Professor</label>
-            {addingNew ? (
+
+            {/* ADMIN_FEATURE: Add-professor form — shown only when STUDENT_CAN_ADD_PROFESSOR is true */}
+            {STUDENT_CAN_ADD_PROFESSOR && addingNew ? (
               <div className="space-y-3">
                 <input
                   type="text"
@@ -230,13 +236,16 @@ export default function ReviewPage() {
                     </option>
                   ))}
                 </select>
-                <button
-                  type="button"
-                  onClick={() => setAddingNew(true)}
-                  className="text-sm text-[#F5A800] hover:underline"
-                >
-                  + Professor not listed? Add them
-                </button>
+                {/* ADMIN_FEATURE: Button hidden — set STUDENT_CAN_ADD_PROFESSOR = true to re-enable */}
+                {STUDENT_CAN_ADD_PROFESSOR && (
+                  <button
+                    type="button"
+                    onClick={() => setAddingNew(true)}
+                    className="text-sm text-[#F5A800] hover:underline"
+                  >
+                    + Professor not listed? Add them
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -298,8 +307,7 @@ export default function ReviewPage() {
           {/* Grade */}
           <div>
             <label className="block text-sm text-white/60 mb-2">
-              Grade Received{" "}
-              <span className="text-white/30">(optional)</span>
+              Grade Received <span className="text-white/30">(optional)</span>
             </label>
             <select
               value={form.grade}
@@ -327,9 +335,7 @@ export default function ReviewPage() {
             />
           </div>
 
-          {error && (
-            <p className="text-red-400 text-sm">{error}</p>
-          )}
+          {error && <p className="text-red-400 text-sm">{error}</p>}
 
           <button
             type="submit"
