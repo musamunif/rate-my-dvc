@@ -253,13 +253,31 @@ export default function ReviewPage() {
           {/* Course */}
           <div>
             <label className="block text-sm text-white/60 mb-2">Course</label>
-            <input
-              type="text"
-              placeholder="e.g. MATH-122, ENGL-120"
-              value={form.course}
-              onChange={(e) => setForm((f) => ({ ...f, course: e.target.value }))}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-[#F5A800]/50"
-            />
+            {(() => {
+              const selectedProf = professors.find((p) => p.id === form.professor_id);
+              const courseSuggestions = selectedProf?.courses
+                ? selectedProf.courses.split(",").map((c) => c.trim()).filter(Boolean)
+                : [];
+              return (
+                <>
+                  <input
+                    type="text"
+                    list="course-suggestions"
+                    placeholder="e.g. MATH-122, ENGL-120"
+                    value={form.course}
+                    onChange={(e) => setForm((f) => ({ ...f, course: e.target.value }))}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-[#F5A800]/50"
+                  />
+                  {courseSuggestions.length > 0 && (
+                    <datalist id="course-suggestions">
+                      {courseSuggestions.map((c) => (
+                        <option key={c} value={c} />
+                      ))}
+                    </datalist>
+                  )}
+                </>
+              );
+            })()}
           </div>
 
           {/* Rating */}

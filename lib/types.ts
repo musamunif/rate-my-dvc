@@ -2,6 +2,7 @@ export interface Professor {
   id: string;
   name: string;
   department: string;
+  courses: string;
   created_at: string;
 }
 

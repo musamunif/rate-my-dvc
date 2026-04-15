@@ -33,6 +33,7 @@ export async function GET() {
       id: p.id,
       name: p.name,
       department: p.department,
+      courses: p.courses || "",
       created_at: p.created_at,
       avg_rating: Math.round(avg_rating * 10) / 10,
       avg_difficulty: Math.round(avg_difficulty * 10) / 10,
