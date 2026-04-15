@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 import { ProfessorWithStats } from "@/lib/types";
 
 const GRADES = ["A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F", "P", "NP", "Prefer not to say"];
@@ -162,17 +163,7 @@ export default function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white font-sans">
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="text-2xl font-black tracking-tight">
-          Rate My <span className="text-[#F5A800]">DVC</span>
-        </Link>
-        <Link
-          href="/professors"
-          className="text-sm text-white/60 hover:text-white transition"
-        >
-          Browse Professors
-        </Link>
-      </nav>
+      <Navbar />
 
       <div className="max-w-xl mx-auto px-6 py-12">
         <h1 className="text-3xl font-black mb-2">Write a Review</h1>

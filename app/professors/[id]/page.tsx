@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Navbar from "@/components/Navbar";
 import { supabase } from "@/lib/supabase";
 import { Review, AiSummary } from "@/lib/types";
 
@@ -116,18 +117,7 @@ export default async function ProfessorPage({
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="text-2xl font-black tracking-tight">
-          Rate My <span className="text-[#F5A800]">DVC</span>
-        </Link>
-        <Link
-          href="/review"
-          className="text-sm bg-[#F5A800] text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-400 transition"
-        >
-          Leave a Review
-        </Link>
-      </nav>
+      <Navbar />
 
       <div className="max-w-4xl mx-auto px-6 py-12">
         {/* Back */}

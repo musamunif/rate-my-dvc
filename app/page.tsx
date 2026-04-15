@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 
 const stats = [
   { label: "Professors Rated", value: "500+" },
@@ -30,26 +31,7 @@ const features = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <span className="text-2xl font-black tracking-tight">
-          Rate My <span className="text-[#F5A800]">DVC</span>
-        </span>
-        <div className="flex items-center gap-4">
-          <Link
-            href="/professors"
-            className="text-sm text-white/60 hover:text-white transition"
-          >
-            Browse Professors
-          </Link>
-          <Link
-            href="/review"
-            className="text-sm bg-[#F5A800] text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-400 transition"
-          >
-            Leave a Review
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="relative flex flex-col items-center justify-center text-center px-6 py-32 overflow-hidden">

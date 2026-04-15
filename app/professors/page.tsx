@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Navbar from "@/components/Navbar";
 import { ProfessorWithStats } from "@/lib/types";
 
 const DEPARTMENTS = [
@@ -126,18 +127,7 @@ export default function ProfessorsPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white font-sans">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <Link href="/" className="text-2xl font-black tracking-tight">
-          Rate My <span className="text-[#F5A800]">DVC</span>
-        </Link>
-        <Link
-          href="/review"
-          className="text-sm bg-[#F5A800] text-black font-semibold px-4 py-2 rounded-full hover:bg-yellow-400 transition"
-        >
-          Leave a Review
-        </Link>
-      </nav>
+      <Navbar />
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         <h1 className="text-3xl font-black mb-2">Browse Professors</h1>
